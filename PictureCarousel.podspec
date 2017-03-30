@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 
 s.name         = "PictureCarousel"
-s.version      = "0.0.1"
+s.version      = "0.0.2"
 s.summary      = '图片轮播'
 s.description  = <<-DESC
 非常好用的图片轮播
