@@ -7,6 +7,7 @@
 //
 
 #import "RScrollImgView.h"
+#import "UIImageView+WebCache.h"
 
 @implementation RScrollImgView
 {
@@ -91,7 +92,7 @@
     
     
     _pageControl = [[UIPageControl alloc] init];
-    _pageControl.currentPageIndicatorTintColor = MainColor;
+    _pageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
 
     
     [self addSubview:_scollView];
