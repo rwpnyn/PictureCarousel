@@ -9,6 +9,21 @@
 #import "RScrollImgView.h"
 #import "UIImageView+WebCache.h"
 
+@implementation RImgModel
+
+- (instancetype)initWithImgUrl:(NSString *)imgUrl defaultImg:(NSString *)defaultImg mark:(NSString *)mark
+{
+    self = [super init];
+    if (self) {
+        _imgUrl = imgUrl;
+        _defaultImg = defaultImg;
+        _mark = mark;
+    }
+    return self;
+}
+
+@end
+
 @implementation RScrollImgView
 {
     UIScrollView *_scollView;
@@ -110,48 +125,43 @@
     if (x < scrollView.frame.size.width*0.5) {
         _currentPageIndex--;
         if (_currentPageIndex < 0) {
-            _currentPageIndex += _imgUrls.count;
+            _currentPageIndex += _imgs.count;
         }
         scrollView.contentOffset = CGPointMake(x + scrollView.frame.size.width, 0);
     }
     [self refreshImgView];
 }
 
-- (void)setImgUrls:(NSArray *)imgUrls
+- (void)setImgs:(NSArray<RImgModel *> *)imgs
 {
-    _imgUrls = imgUrls;
+    _imgs = imgs;
     
-    _pageControl.numberOfPages = imgUrls.count;
+    _pageControl.numberOfPages = imgs.count;
     
     [self refreshImgView];
 }
-
 - (void)refreshImgView
 {
-    _pageControl.currentPage = (_currentPageIndex+0)%self.imgUrls.count;
+    _pageControl.currentPage = (_currentPageIndex+0)%self.imgs.count;
     
-    NSURL *url1 = [NSURL URLWithString:self.imgUrls[(_currentPageIndex+2)%self.imgUrls.count]];
-    [_imgVScroll1 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"defaultimg"]];
-    NSURL *url2 = [NSURL URLWithString:self.imgUrls[(_currentPageIndex+0)%self.imgUrls.count]];
-    [_imgVScroll2 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"defaultimg"]];
-    NSURL *url3 = [NSURL URLWithString:self.imgUrls[(_currentPageIndex+1)%self.imgUrls.count]];
-    [_imgVScroll3 sd_setImageWithURL:url3 placeholderImage:[UIImage imageNamed:@"defaultimg"]];
+    RImgModel *model1 = self.imgs[(_currentPageIndex+2)%self.imgs.count];
+    RImgModel *model2 = self.imgs[(_currentPageIndex+0)%self.imgs.count];
+    RImgModel *model3 = self.imgs[(_currentPageIndex+1)%self.imgs.count];
+    
+    NSURL *url1 = [NSURL URLWithString:model1.imgUrl];
+    [_imgVScroll1 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:model1.defaultImg]];
+    NSURL *url2 = [NSURL URLWithString:model2.imgUrl];
+    [_imgVScroll2 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:model2.defaultImg]];
+    NSURL *url3 = [NSURL URLWithString:model3.imgUrl];
+    [_imgVScroll3 sd_setImageWithURL:url3 placeholderImage:[UIImage imageNamed:model3.defaultImg]];
     
 }
 
 - (void)clickScroll:(UITapGestureRecognizer *)tap
 {
     if (self.clickImgsAtIndex) {
-        self.clickImgsAtIndex((_currentPageIndex+0)%self.imgUrls.count);
+        self.clickImgsAtIndex(self.imgs[(_currentPageIndex+0)%self.imgs.count]);
     }
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
