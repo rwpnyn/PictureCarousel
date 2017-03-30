@@ -92,8 +92,8 @@ s.source       = { :git => "https://github.com/rwpnyn/PictureCarousel.git", :tag
 #  Not including the public_header_files will make all headers public.
 #
 
-#  s.source_files  = "Classes", "Classes/**/*.{h,m}"
-#  s.exclude_files = "Classes/Exclude"
+#  s.source_files  = "PictureCarousel/*.{h,m}"
+#  s.exclude_files = "PictureCarousel/*.{h,m}"
 
 s.source_files = "PictureCarousel/*.{h,m}"
 s.resources    = "PictureCarousel/*.png"
