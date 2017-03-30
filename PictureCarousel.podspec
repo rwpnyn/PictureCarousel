@@ -17,7 +17,7 @@ s.source_files = "PictureCarousel/*.{h,m}"
 s.resources    = "PictureCarousel/*.png"
 s.frameworks   = "UIKit", "Foundation"
 s.requires_arc = true
-s.dependency "SDWebImage","3.7.2"
+s.dependency "SDWebImage"
 
 end
 
