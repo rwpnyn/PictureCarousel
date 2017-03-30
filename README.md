@@ -4,9 +4,11 @@
 使用方法
 
 第一步
+
 pod 'PictureCarousel', :git => 'https://github.com/rwpnyn/PictureCarousel.git'
 
 第二步
+
 RScrollImgView *s = [[RScrollImgView alloc] init];
 s.frame = CGRectMake(0, 0, 300, 200);
 [self.view addSubview:s];
@@ -17,10 +19,13 @@ RImgModel *m = [[RImgModel alloc] initWithImgUrl:@"https://ss1.bdstatic.com/6ONY
 
 [dataSource addObject:m];
 }
+
 // 添加数据
+
 [s setImgs:dataSource];
 
 // 点击事件
+
 [s setClickImgsAtIndex:^(RImgModel *model) {
 
 }];
