@@ -144,7 +144,7 @@
 {
     _pageControl.currentPage = (_currentPageIndex+0)%self.imgs.count;
     
-    RImgModel *model1 = self.imgs[(_currentPageIndex+2)%self.imgs.count];
+    RImgModel *model1 = self.imgs[(_currentPageIndex+self.imgs.count-1)%self.imgs.count];
     RImgModel *model2 = self.imgs[(_currentPageIndex+0)%self.imgs.count];
     RImgModel *model3 = self.imgs[(_currentPageIndex+1)%self.imgs.count];
     
